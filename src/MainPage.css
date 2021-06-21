@@ -1,0 +1,71 @@
+body{
+
+background-color:#F5F5F5 !important;
+
+}
+
+.containerOne{
+
+height:100px;
+width:100%;
+background-color:#020001;
+text-align:center;
+line-height:100px;
+
+}
+
+.containerHeading{
+
+color:white;
+
+}
+
+.ContainerTwo{
+
+margin-top:20px;
+
+
+}
+
+.Tablebox{
+
+width:
+
+}
+
+
+.HeadingPad{
+
+padding-left:13px;
+
+}
+
+#userDetail{
+
+    display:none;
+    border:2px solid grey;
+    padding:10px;
+    
+}
+
+#HeadingPad{
+
+margin-top:20px !important;
+
+}
+
+.tableWidth{
+
+width:80% !important;
+
+}
+
+@media screen and (max-width:780px){
+
+.tableWidth{
+
+ width:100% !important;
+        
+}
+
+}
