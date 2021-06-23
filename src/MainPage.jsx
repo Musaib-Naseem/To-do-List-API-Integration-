@@ -19,9 +19,9 @@ import "./MainPage.css";
 
 
 const [data,setData]=useState([]);
-// var updata=data.replaceAll(/false/g,"Incomplete");
-// console.log(updata);
 const [newFilterData,setNewFilterData]=useState([]);
+const [allData,setAllData]=useState([]);
+console.log(allData);
 const [indivdualData,setIndivdualData]=useState("");
 const [title,setTitle]=useState("");
 const [keyey,setKeyey]=useState("");
@@ -37,7 +37,6 @@ console.log(data);
 
 
 const url="https://jsonplaceholder.typicode.com/todos";
-// const url="https://jsonplaceholder.typicode.com/todos";
 
 function getUserDetails(){
 
@@ -45,13 +44,8 @@ var result = Axios.get(url)
 .then((response)=>{
 
     const finalData=response.data;
-
-    // const updateData=finalData.replace(/false/g,"Incomplete")
-    
-    // console.log(updateData);
-
     setData(finalData);
-    setNewFilterData(finalData)
+    setNewFilterData(finalData);
     
 
 
@@ -62,8 +56,6 @@ var result = Axios.get(url)
 
 function showDetail(key,title){
 
-//   alert(key);
-//   alert(title);
   
   
   var userIndividual = Axios.get(`https://jsonplaceholder.typicode.com/users/${key}`)
@@ -73,6 +65,24 @@ function showDetail(key,title){
     console.log(response.data);
     setIndivdualData(response.data);
     document.getElementById("userDetail").style.display="block";
+
+    
+    var allResult = Axios.get(url)
+    .then((response)=>{
+    
+        const AllFinalData=response.data;
+        
+        console.log(AllFinalData);
+       
+       var filtdata=AllFinalData.filter(item=>item.userId===key);
+
+       setAllData(filtdata);
+    
+    
+    });
+
+
+
 
 
 });
@@ -178,7 +188,7 @@ return(
 
     { data.map((data,key)=>{
     
-        key=data.id;
+        key=data.userId;
         var title=data.title;
         
         var val;
@@ -230,13 +240,79 @@ return(
       <h4>{`Name : ${indivdualData.name} `}</h4>
       <h4>{`Email : ${indivdualData.email} `}</h4>
       </div>
+      
+     
+      <TableContainer className="tableWidth">
+     <Table>
+     
+     <TableHead>
+   
+     <TableRow>
+
+     <TableCell>Todo&nbsp;Id</TableCell>
+     <TableCell>Title</TableCell>
+     <TableCell>Status</TableCell>
+     
+
+     </TableRow>
+
+
+     </TableHead>
+
+
+
+
+    <TableBody>
+
+    { allData.map((data,key)=>{
+    
+      key=data.userId;
+        
+        var val;
+        if(data.completed == false){
+          val="Incomplete";
+
+        }
+        else{
+        
+            val="Complete";
+
+        }
+        return( 
+            <TableRow >
+
+              <TableCell align="left">{data.id}</TableCell>
+              <TableCell align="left">{data.title}</TableCell>
+              <TableCell align="left">{val}</TableCell>
+              
+              
+           </TableRow>
+        );
+        })}
+        
+        
+        
+    </TableBody>
+
+     </Table>
+     </TableContainer>
+
+
+
+
+
       </Grid>
 
        
        
       </Grid>
+
+      
 
       </Container>
+
+
+      
 
 
     
