@@ -281,7 +281,7 @@ return(
         return( 
             <TableRow >
 
-              <TableCell align="left">{data.id}</TableCell>
+              <TableCell align="left">{data.userId}</TableCell>
               <TableCell align="left">{data.title}</TableCell>
               <TableCell align="left">{val}</TableCell>
               
